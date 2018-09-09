@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Clock"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="Analog Clock" Height="450" Width="450">
     <Grid>
-        
+        <Canvas Width="400" Height="400" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8">
+            <Ellipse Stroke="Black" Width="400" Height="400"/>
+        </Canvas>
     </Grid>
 </Window>
