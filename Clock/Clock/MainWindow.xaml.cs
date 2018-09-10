@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,16 +11,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Clock
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        private static readonly IDictionary<ArrowKind, Arrow> arrowsByKind = new Dictionary<ArrowKind, Arrow>();
+        private Point Center => new Point(clockCircumference.Width / 2, clockCircumference.Height / 2);
+        private double Radius => Center.X;
+
         public MainWindow()
         {
             InitializeComponent();
