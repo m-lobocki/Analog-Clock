@@ -11,6 +11,7 @@ namespace Clock
         private Line line;
 
         public ArrowKind Kind { get; }
+        public short DegreePerTimeUnit { get; }
         public double Thickness { get; }
         public Line Line
         {
@@ -28,9 +29,10 @@ namespace Clock
             }
         }
 
-        public Arrow(ArrowKind kind, double thickness)
+        public Arrow(ArrowKind kind, short degreePerTimeUnit, double thickness)
         {
             Kind = kind;
+            DegreePerTimeUnit = degreePerTimeUnit;
             Thickness = thickness;
         }
     }
