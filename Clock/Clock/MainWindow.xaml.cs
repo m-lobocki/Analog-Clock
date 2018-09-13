@@ -24,6 +24,25 @@ namespace Clock
         public MainWindow()
         {
             InitializeComponent();
+
+        }
+
+       
+
+        private void DisplayTimeArrow(Arrow arrow)
+        {
+            var line = new Line
+            {
+                Stroke = Brushes.Black,
+                StrokeThickness = arrow.Thickness,
+                X2 = 0,
+                Y2 = Center.X,
+            };
+
+            arrow.Line = line;
+            arrowsByKind[arrow.Kind] = arrow;
+            clock.Children.Add(line);
         }
     }
+
 }
