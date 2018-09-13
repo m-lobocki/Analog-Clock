@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace Clock
@@ -13,6 +14,8 @@ namespace Clock
         public ArrowKind Kind { get; }
         public short DegreePerTimeUnit { get; }
         public double Thickness { get; }
+        public Brush Color { get; }
+
         public Line Line
         {
             get => line;
@@ -34,6 +37,12 @@ namespace Clock
             Kind = kind;
             DegreePerTimeUnit = degreePerTimeUnit;
             Thickness = thickness;
+            Color = Brushes.Black;
+        }
+
+        public Arrow(ArrowKind kind, short degreePerTimeUnit, double thickness, Brush color) : this(kind, degreePerTimeUnit, thickness)
+        {
+            Color = color;
         }
     }
 }
