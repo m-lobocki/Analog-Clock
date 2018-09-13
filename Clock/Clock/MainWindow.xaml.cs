@@ -24,10 +24,16 @@ namespace Clock
         public MainWindow()
         {
             InitializeComponent();
-
+            InitializeTimeArrows();
         }
 
-       
+        
+        private void InitializeTimeArrows()
+        {
+            DisplayTimeArrow(new Arrow(ArrowKind.Second, thickness: 1));
+            DisplayTimeArrow(new Arrow(ArrowKind.Minute, thickness: 2));
+            DisplayTimeArrow(new Arrow(ArrowKind.Hour, thickness: 3));
+        }
 
         private void DisplayTimeArrow(Arrow arrow)
         {
