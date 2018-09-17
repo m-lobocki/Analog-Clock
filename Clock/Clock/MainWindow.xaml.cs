@@ -25,21 +25,47 @@ namespace Clock
         {
             InitializeComponent();
             InitializeTimeArrows();
+            InitializeTimer();
         }
 
-        
+        private void InitializeTimer()
+        {
+            var timer = new Timer { Interval = 100 };
+            timer.Elapsed += (sender, args) =>
+            {
+                var timeNow = DateTime.Now;
+               UpdateTime(ArrowKind.Second, timeNow.Second);
+               UpdateTime(ArrowKind.Minute, timeNow.Minute);
+               UpdateTime(ArrowKind.Hour, timeNow.Hour);
+            };
+            timer.Start();
+        }
+
+        private void UpdateTime(ArrowKind arrowType, int timeUnit)
+        {
+            Arrow arrow = arrowsByKind[arrowType];
+            Line timeArrowLine = arrow.Line;
+            arrow.Line.Dispatcher.Invoke(() =>
+            {
+                // calculated degrees in radians; 0,5*PI is an offset so as to start straitght above the center (0,0)
+                double rotation = (arrow.DegreePerTimeUnit * timeUnit * Math.PI / 180) + (0.5 * Math.PI);
+                timeArrowLine.Y2 = Radius * Math.Sin(rotation);
+                timeArrowLine.X2 = Radius * Math.Cos(rotation);
+            });
+        }
+
         private void InitializeTimeArrows()
         {
-            DisplayTimeArrow(new Arrow(ArrowKind.Second, thickness: 1));
-            DisplayTimeArrow(new Arrow(ArrowKind.Minute, thickness: 2));
-            DisplayTimeArrow(new Arrow(ArrowKind.Hour, thickness: 3));
+            DisplayTimeArrow(new Arrow(ArrowKind.Second, degreePerTimeUnit: 6, thickness: 1, color: Brushes.Red));
+            DisplayTimeArrow(new Arrow(ArrowKind.Minute, degreePerTimeUnit: 6, thickness: 1));
+            DisplayTimeArrow(new Arrow(ArrowKind.Hour, degreePerTimeUnit: 30, thickness: 3));
         }
 
         private void DisplayTimeArrow(Arrow arrow)
         {
             var line = new Line
             {
-                Stroke = Brushes.Black,
+                Stroke = arrow.Color,
                 StrokeThickness = arrow.Thickness,
                 X2 = 0,
                 Y2 = Center.X,
