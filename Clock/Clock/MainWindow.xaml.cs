@@ -26,6 +26,7 @@ namespace Clock
             InitializeComponent();
             InitializeTimeArrows();
             InitializeTimer();
+
         }
 
         private void InitializeTimer()
@@ -48,7 +49,7 @@ namespace Clock
             arrow.Line.Dispatcher.Invoke(() =>
             {
                 // calculated degrees in radians; 0,5*PI is an offset so as to start straitght above the center (0,0)
-                double rotation = (arrow.DegreePerTimeUnit * timeUnit * Math.PI / 180) + (0.5 * Math.PI);
+                double rotation = (arrow.DegreePerTimeUnit * timeUnit * Math.PI / 180) - (0.5 * Math.PI);
                 timeArrowLine.Y2 = Radius * Math.Sin(rotation);
                 timeArrowLine.X2 = Radius * Math.Cos(rotation);
             });
