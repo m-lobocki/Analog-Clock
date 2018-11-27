@@ -74,7 +74,7 @@ namespace Clock
 
             arrow.Line = line;
             arrowsByKind[arrow.Kind] = arrow;
-            clock.Children.Add(line);
+            clock.Children.Insert(0,line);
         }
     }
 
