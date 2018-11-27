@@ -18,7 +18,7 @@ namespace Clock
     public partial class MainWindow : Window
     {
         private static readonly IDictionary<ArrowKind, Arrow> arrowsByKind = new Dictionary<ArrowKind, Arrow>();
-        private Point Center => new Point(clockCircumference.Width / 2, clockCircumference.Height / 2);
+        private Point Center => new Point(clockCircumference.ActualWidth / 2, clockCircumference.ActualHeight / 2);
         private double Radius => Center.X;
 
         public MainWindow()
@@ -75,6 +75,12 @@ namespace Clock
             arrow.Line = line;
             arrowsByKind[arrow.Kind] = arrow;
             clock.Children.Insert(0,line);
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            Canvas.SetLeft(clockCircumference, -1 * clockCircumference.ActualWidth / 2);
+            Canvas.SetTop(clockCircumference, -1 * clockCircumference.ActualHeight / 2);
         }
     }
 
